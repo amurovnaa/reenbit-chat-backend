@@ -4,8 +4,8 @@ export const getAllChats = async () => {
   return await Chat.find().sort({ createdAt: -1 });
 };
 
-export const createChat = async ({ firstName, lastName, avatarUrl }) => {
-  return await Chat.create({ firstName, lastName, avatar: avatarUrl });
+export const createChat = async ({ firstName, lastName, avatar }) => {
+  return await Chat.create({ firstName, lastName, avatar });
 };
 
 export const updateChatById = async (id, data) => {
