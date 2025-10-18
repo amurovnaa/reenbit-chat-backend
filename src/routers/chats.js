@@ -5,6 +5,7 @@ import {
   getChatsController,
   updateChatController,
 } from '../controllers/chat.js';
+import { upload } from '../middlewares/multer.js';
 
 const chatsRouter = express.Router();
 
@@ -17,7 +18,7 @@ const chatsRouter = express.Router();
  *     summary: Create new chat
  */
 chatsRouter.get('/', getChatsController);
-chatsRouter.post('/', createChatController);
+chatsRouter.post('/', upload.single('avatar'), createChatController);
 
 /**
  * @swagger
@@ -27,7 +28,7 @@ chatsRouter.post('/', createChatController);
  *   delete:
  *     summary: Delete chat
  */
-chatsRouter.put('/:id', updateChatController);
+chatsRouter.put('/:id', upload.single('avatar'), updateChatController);
 chatsRouter.delete('/:id', deleteChatController);
 
 export default chatsRouter;
