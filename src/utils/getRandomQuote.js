@@ -1,16 +1,12 @@
-import https from 'https';
 import axios from 'axios';
-
-const agent = new https.Agent({ rejectUnauthorized: false });
+const fallbackQuotes = ['Keep going!', 'You can do it!', 'Never give up!'];
 
 export const getRandomQuote = async () => {
   try {
-    const res = await axios.get('https://api.quotable.io/random', {
-      httpsAgent: agent,
-    });
+    const res = await axios.get('https://api.quotable.io/random');
     return res.data.content;
-  } catch (err) {
-    console.error('Failed to fetch quote:', err.message);
-    return 'Keep going!';
+  } catch {
+    console.warn('Quotable fetch failed, using fallback.');
+    return fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
   }
 };
