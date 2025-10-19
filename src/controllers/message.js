@@ -18,8 +18,8 @@ export const sendMessageController = async (req, res, next) => {
       return res.status(400).json({ message: 'chatId and text are required' });
     }
 
-    const userMsg = await createMessage(chatId, 'user', text, io);
-    res.status(201).json(userMsg);
+    const message = await createMessage(chatId, 'user', text, io);
+    res.status(201).json(message);
   } catch (err) {
     next(err);
   }
