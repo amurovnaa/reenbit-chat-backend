@@ -28,7 +28,7 @@ chatsRouter.post('/', upload.single('avatar'), createChatController);
  *   delete:
  *     summary: Delete chat
  */
-chatsRouter.put('/:id', upload.single('avatar'), updateChatController);
+chatsRouter.patch('/:id', upload.single('avatar'), updateChatController);
 chatsRouter.delete('/:id', deleteChatController);
 
 export default chatsRouter;

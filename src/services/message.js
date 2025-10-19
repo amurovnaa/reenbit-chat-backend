@@ -26,3 +26,18 @@ export const createMessage = async (chatId, sender, text, io) => {
 
   return message;
 };
+export const updateMessage = async (messageId, newText, io) => {
+  const updatedMessage = await Message.findByIdAndUpdate(
+    messageId,
+    { text: newText, updatedAt: new Date() },
+    { new: true },
+  );
+
+  if (!updatedMessage) throw new Error('Message not found');
+
+  if (io) {
+    io.emit('messageUpdated', updatedMessage);
+  }
+
+  return updatedMessage;
+};
